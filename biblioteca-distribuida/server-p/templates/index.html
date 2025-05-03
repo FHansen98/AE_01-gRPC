@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Biblioteca Distribuída</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Biblioteca Distribuída</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-section="books">Livros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="users">Usuários</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="loans">Empréstimos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    <h4>Sistema de Biblioteca Distribuída</h4>
+                    <p>Este sistema demonstra a arquitetura distribuída com gRPC:</p>
+                    <ul>
+                        <li><strong>Módulo P (Python):</strong> Web Server + gRPC Stub</li>
+                        <li><strong>Módulo A (Go):</strong> gRPC Server para gerenciamento de livros</li>
+                        <li><strong>Módulo B (Node.js):</strong> gRPC Server para gerenciamento de usuários e empréstimos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Livros -->
+        <div id="books-section" class="section-content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Gerenciamento de Livros</h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">
+                    <i class="bi bi-plus-circle"></i> Adicionar Livro
+                </button>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text">Categoria</span>
+                        <select id="category-filter" class="form-select">
+                            <option value="">Todas</option>
+                            <option value="Ficção">Ficção</option>
+                            <option value="Não-Ficção">Não-Ficção</option>
+                            <option value="Técnico">Técnico</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Ciência">Ciência</option>
+                        </select>
+                        <button class="btn btn-outline-secondary" id="filter-books-btn">Filtrar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Categoria</th>
+                            <th>Ano</th>
+                            <th>Disponível</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="books-table-body">
+                        <!-- Dados dos livros serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Seção de Usuários -->
+        <div id="users-section" class="section-content d-none">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Gerenciamento de Usuários</h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    <i class="bi bi-plus-circle"></i> Adicionar Usuário
+                </button>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <!-- Dados dos usuários serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Seção de Empréstimos -->
+        <div id="loans-section" class="section-content d-none">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Gerenciamento de Empréstimos</h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLoanModal">
+                    <i class="bi bi-plus-circle"></i> Novo Empréstimo
+                </button>
+            </div>
+            
+            <ul class="nav nav-tabs mb-3">
+                <li class="nav-item">
+                    <a class="nav-link active" id="all-loans-tab" href="#" data-loan-type="all">Todos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="active-loans-tab" href="#" data-loan-type="active">Ativos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="overdue-loans-tab" href="#" data-loan-type="overdue">Atrasados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="returned-loans-tab" href="#" data-loan-type="returned">Devolvidos</a>
+                </li>
+            </ul>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuário</th>
+                            <th>Livro</th>
+                            <th>Data Empréstimo</th>
+                            <th>Data Devolução</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loans-table-body">
+                        <!-- Dados dos empréstimos serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar livro -->
+    <div class="modal fade" id="addBookModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Livro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-book-form">
+                        <div class="mb-3">
+                            <label for="book-title" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="book-title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-author" class="form-label">Autor</label>
+                            <input type="text" class="form-control" id="book-author" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-category" class="form-label">Categoria</label>
+                            <select class="form-select" id="book-category" required>
+                                <option value="Ficção">Ficção</option>
+                                <option value="Não-Ficção">Não-Ficção</option>
+                                <option value="Técnico">Técnico</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Ciência">Ciência</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-year" class="form-label">Ano</label>
+                            <input type="number" class="form-control" id="book-year" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="save-book-btn">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar usuário -->
+    <div class="modal fade" id="addUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-user-form">
+                        <div class="mb-3">
+                            <label for="user-name" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="user-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="user-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="user-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="user-phone" class="form-label">Telefone</label>
+                            <input type="text" class="form-control" id="user-phone" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="save-user-btn">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar empréstimo -->
+    <div class="modal fade" id="addLoanModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Empréstimo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-loan-form">
+                        <div class="mb-3">
+                            <label for="loan-user" class="form-label">Usuário</label>
+                            <select class="form-select" id="loan-user" required>
+                                <!-- Opções serão preenchidas via JavaScript -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loan-book" class="form-label">Livro</label>
+                            <select class="form-select" id="loan-book" required>
+                                <!-- Opções serão preenchidas via JavaScript -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loan-date" class="form-label">Data de Empréstimo</label>
+                            <input type="date" class="form-control" id="loan-date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="due-date" class="form-label">Data de Devolução</label>
+                            <input type="date" class="form-control" id="due-date" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="save-loan-btn">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

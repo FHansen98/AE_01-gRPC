@@ -1,0 +1,150 @@
+syntax = "proto3";
+
+package biblioteca;
+
+// Serviço para gerenciamento de livros (Servidor A)
+service BookService {
+  // Buscar todos os livros
+  rpc GetAllBooks(Empty) returns (BookList) {}
+  
+  // Buscar livro por ID
+  rpc GetBook(BookId) returns (Book) {}
+  
+  // Adicionar novo livro
+  rpc AddBook(Book) returns (BookResponse) {}
+  
+  // Atualizar livro existente
+  rpc UpdateBook(Book) returns (BookResponse) {}
+  
+  // Remover livro
+  rpc DeleteBook(BookId) returns (BookResponse) {}
+  
+  // Buscar livros por categoria (streaming de servidor)
+  rpc GetBooksByCategory(Category) returns (stream Book) {}
+}
+
+// Serviço para gerenciamento de usuários e empréstimos (Servidor B)
+service UserService {
+  // Buscar todos os usuários
+  rpc GetAllUsers(Empty) returns (UserList) {}
+  
+  // Buscar usuário por ID
+  rpc GetUser(UserId) returns (User) {}
+  
+  // Adicionar novo usuário
+  rpc AddUser(User) returns (UserResponse) {}
+  
+  // Atualizar usuário existente
+  rpc UpdateUser(User) returns (UserResponse) {}
+  
+  // Remover usuário
+  rpc DeleteUser(UserId) returns (UserResponse) {}
+}
+
+service LoanService {
+  // Criar novo empréstimo
+  rpc CreateLoan(Loan) returns (LoanResponse) {}
+  
+  // Buscar empréstimos de um usuário
+  rpc GetUserLoans(UserId) returns (LoanList) {}
+  
+  // Devolver livro
+  rpc ReturnBook(LoanId) returns (LoanResponse) {}
+  
+  // Streaming de empréstimos atrasados
+  rpc GetOverdueLoans(Empty) returns (stream Loan) {}
+  
+  // Streaming bidirecional para atualização de status de empréstimos
+  rpc UpdateLoanStatus(stream LoanStatusUpdate) returns (stream LoanStatusResponse) {}
+}
+
+// Mensagens
+
+message Empty {}
+
+// Livros
+message Book {
+  string id = 1;
+  string title = 2;
+  string author = 3;
+  string category = 4;
+  int32 year = 5;
+  bool available = 6;
+}
+
+message BookId {
+  string id = 1;
+}
+
+message Category {
+  string name = 1;
+}
+
+message BookList {
+  repeated Book books = 1;
+}
+
+message BookResponse {
+  bool success = 1;
+  string message = 2;
+  Book book = 3;
+}
+
+// Usuários
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string phone = 4;
+}
+
+message UserId {
+  string id = 1;
+}
+
+message UserList {
+  repeated User users = 1;
+}
+
+message UserResponse {
+  bool success = 1;
+  string message = 2;
+  User user = 3;
+}
+
+// Empréstimos
+message Loan {
+  string id = 1;
+  string user_id = 2;
+  string book_id = 3;
+  string loan_date = 4;
+  string due_date = 5;
+  string return_date = 6;
+  string status = 7; // "active", "returned", "overdue"
+}
+
+message LoanId {
+  string id = 1;
+}
+
+message LoanList {
+  repeated Loan loans = 1;
+}
+
+message LoanResponse {
+  bool success = 1;
+  string message = 2;
+  Loan loan = 3;
+}
+
+message LoanStatusUpdate {
+  string loan_id = 1;
+  string new_status = 2;
+}
+
+message LoanStatusResponse {
+  bool success = 1;
+  string message = 2;
+  string loan_id = 3;
+  string status = 4;
+}

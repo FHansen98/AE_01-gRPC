@@ -1,0 +1,7 @@
+grpcio==1.54.0
+grpcio-tools==1.54.0
+protobuf==4.22.3
+Flask==2.3.2
+Flask-CORS==4.0.0
+requests==2.31.0
+python-dotenv==1.0.0

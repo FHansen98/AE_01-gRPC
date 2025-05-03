@@ -1,0 +1,57 @@
+.section-content {
+    padding: 20px 0;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.badge-available {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-unavailable {
+    background-color: #dc3545;
+    color: white;
+}
+
+.status-active {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-returned {
+    color: #6c757d;
+}
+
+.status-overdue {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link {
+    cursor: pointer;
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    border-color: #b3e5fc;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.btn-action {
+    margin-right: 5px;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+}
