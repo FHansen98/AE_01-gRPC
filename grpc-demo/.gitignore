@@ -1,0 +1,36 @@
+# Ambiente virtual
+venv/
+env/
+ENV/
+
+# Arquivos compilados Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Arquivos de distribuição
+dist/
+build/
+*.egg-info/
+
+# Arquivos de cache
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Arquivos de IDE e editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+service_pb2.py
+service_pb2_grpc.py
+
