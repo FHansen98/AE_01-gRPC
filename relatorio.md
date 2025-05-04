@@ -72,7 +72,6 @@ O gRPC suporta quatro tipos principais de comunicação entre cliente e servidor
    - O cliente envia um fluxo de mensagens e o servidor responde com uma única mensagem
    - Apropriado quando o cliente precisa enviar uma grande quantidade de dados ou um fluxo contínuo
    - Aplicações: upload de arquivos, envio de telemetria
-   - Não implementado no projeto atual
 
 4. **Bidirectional Streaming RPC**: Múltiplas requisições e múltiplas respostas em streaming
    - Cliente e servidor enviam fluxos de mensagens de forma independente
@@ -107,27 +106,6 @@ O gRPC suporta quatro tipos principais de comunicação entre cliente e servidor
 | Recursos enterprise | Em desenvolvimento | Maduros (WS-*) |
 | Compatibilidade | Multiplataforma | Multiplataforma |
 
-#### gRPC vs GraphQL
-
-| Característica | gRPC | GraphQL |
-|----------------|------|---------|
-| Foco principal | Comunicação serviço-a-serviço | API para clientes frontend |
-| Protocolo | HTTP/2 | HTTP |
-| Formato de dados | Protocol Buffers | JSON |
-| Consultas | Métodos predefinidos | Consultas flexíveis |
-| Streaming | Suporte nativo | Limitado (subscriptions) |
-| Tipagem | Forte | Forte |
-| Caso de uso ideal | Microserviços, sistemas internos | APIs públicas, aplicações frontend |
-
-#### gRPC vs Message Queues (RabbitMQ, Kafka)
-
-| Característica | gRPC | Message Queues |
-|----------------|------|---------------|
-| Paradigma | Síncrono (pode ser assíncrono com streaming) | Assíncrono |
-| Acoplamento | Direto (cliente-servidor) | Desacoplado (publicador-assinante) |
-| Durabilidade | Não durável | Durável (mensagens persistentes) |
-| Balanceamento de carga | Requer configuração adicional | Nativo |
-| Caso de uso ideal | Comunicação direta, baixa latência | Processamento assíncrono, desacoplamento |
 
 O gRPC se destaca em cenários onde a performance, a tipagem forte e o suporte a streaming são requisitos importantes, especialmente em arquiteturas de microserviços e sistemas distribuídos internos. No entanto, para APIs públicas ou casos onde a interoperabilidade com navegadores é crucial, REST ou GraphQL podem ser alternativas mais adequadas.
 
