@@ -11,7 +11,6 @@
 | Nome | Matrícula |
 |------|---------|
 | Felipe Direito Corrieri de Macedo | 190086971 |
-| Rodrigo Edmar Wright Dos Santos | 200027158 |
 
 ## 1. Introdução
 
@@ -357,12 +356,6 @@ Além disso, o estudo e implementação de um ambiente virtualizado com KVM/QEMU
 
 #### Felipe Direito C. Macedo (190086971)
 O desenvolvimento deste projeto me permitiu aprofundar meus conhecimentos em comunicação entre sistemas distribuídos, especialmente utilizando gRPC. A implementação de diferentes padrões de streaming foi particularmente desafiadora e enriquecedora. Além disso, o trabalho com virtualização expandiu minha compreensão sobre infraestrutura para sistemas distribuídos. Auto-avaliação: 9/10.
-
-#### Rodrigo Edmar Wright Dos Santos (200027158)
-O projeto permitiu que eu pudesse revisar o conteúdo e apliticar na prática aquilo que nós vemos em sala, além disso, foi possível compreender de forma mais aprofundada sistemas distribuídos que usam gRPC e outras implementações válidas desses tipos de projetos.
-
-#### [Nome do Aluno 3] ([Matrícula 3])
-[Texto sobre aprendizados, desafios enfrentados e auto-avaliação]
 
 ## 6. Referências
 
