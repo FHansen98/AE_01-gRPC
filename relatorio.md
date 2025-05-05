@@ -4,7 +4,7 @@
 - **Universidade**: Universidade de Brasília (UnB)
 - **Disciplina**: Programação de Sistemas Paralelos e Distribuídos (PSPD)
 - **Turma**: 2025/1
-- **Professor**: Alba Cristina Magalhaes Alves de Melo
+- **Professor**: Fernando
 
 ## Participantes:
 
