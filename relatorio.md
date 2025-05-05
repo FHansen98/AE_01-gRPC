@@ -4,13 +4,13 @@
 - **Universidade**: Universidade de Brasília (UnB)
 - **Disciplina**: Programação de Sistemas Paralelos e Distribuídos (PSPD)
 - **Turma**: 2025/1
-- **Professor**: Fernando
 
 ## Participantes:
 
 | Nome | Matrícula |
 |------|---------|
 | Felipe Direito Corrieri de Macedo | 190086971 |
+| Felipe Aguiar Hansen | 222032810 |
 
 ## 1. Introdução
 
@@ -356,6 +356,10 @@ Além disso, o estudo e implementação de um ambiente virtualizado com KVM/QEMU
 
 #### Felipe Direito C. Macedo (190086971)
 O desenvolvimento deste projeto me permitiu aprofundar meus conhecimentos em comunicação entre sistemas distribuídos, especialmente utilizando gRPC. A implementação de diferentes padrões de streaming foi particularmente desafiadora e enriquecedora. Além disso, o trabalho com virtualização expandiu minha compreensão sobre infraestrutura para sistemas distribuídos. Auto-avaliação: 9/10.
+
+#### Felipe Aguiar Hansen (222032810)
+
+O projeto proporcionou um aprendizado sobre os quatro tipos de comunicação em gRPC: Unary (requisição única, resposta única), Server Streaming (requisição única, múltiplas respostas), Client Streaming (múltiplas requisições, resposta única) e Bidirectional Streaming (múltiplas requisições, múltiplas respostas). A definição do Protocol Buffers (.proto) mostrou a necessidade de estabelecer o contrato de comunicação entre cliente e servidor, especificando serviços, métodos e estruturas de dados de forma independente de linguagem. A estrutura geral das comunicações no projeto seguiu um padrão consistente: definição dos serviços no protobuf, geração de código para cliente e servidor, implementação da lógica do servidor para processar as requisições e implementação do cliente para invocar os métodos remotos. Auto-avaliação 9/10
 
 ## 6. Referências
 
