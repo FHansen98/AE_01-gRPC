@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package biblioteca;
 
+// Add go_package option for Go code generation
+option go_package = "biblioteca-server-a/proto";
+
 // Serviço para gerenciamento de livros (Servidor A)
 service BookService {
   // Buscar todos os livros

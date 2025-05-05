@@ -5,3 +5,5 @@ Flask==2.3.2
 Flask-CORS==4.0.0
 requests==2.31.0
 python-dotenv==1.0.0
+# Add wheel to help with installation
+wheel==0.40.0

@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  server-a:
+    build:
+      context: .
+      dockerfile: ./server-a/Dockerfile
+    ports:
+      - "50051:50051"
+    networks:
+      - biblioteca-network
+
+  server-b:
+    build:
+      context: .
+      dockerfile: ./server-b/Dockerfile
+    ports:
+      - "50052:50052"
+    networks:
+      - biblioteca-network
+
+  server-p:
+    build:
+      context: .
+      dockerfile: ./server-p/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - SERVER_A_ADDRESS=server-a:50051
+      - SERVER_B_ADDRESS=server-b:50052
+    depends_on:
+      - server-a
+      - server-b
+    networks:
+      - biblioteca-network
+
+networks:
+  biblioteca-network:
+    driver: bridge

@@ -236,6 +236,25 @@ def delete_user(user_id):
         return jsonify({'error': str(e)}), 500
 
 # API para empréstimos
+@app.route('/api/loans', methods=['GET'])
+def get_loans():
+    try:
+        with grpc.insecure_channel(os.environ.get('SERVER_B_ADDRESS', 'server-b:50052')) as channel:
+            stub = biblioteca_pb2_grpc.LoanServiceStub(channel)
+            response = stub.GetAllLoans(biblioteca_pb2.Empty())
+            return jsonify({
+                'loans': [{
+                    'id': loan.id,
+                    'user_id': loan.user_id,
+                    'book_id': loan.book_id,
+                    'loan_date': loan.loan_date,
+                    'due_date': loan.due_date,
+                    'status': loan.status
+                } for loan in response.loans]
+            })
+    except grpc.RpcError as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/loans', methods=['POST'])
 def create_loan():
     try:
