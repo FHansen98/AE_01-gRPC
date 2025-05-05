@@ -10,9 +10,8 @@
 
 | Nome | Matrícula |
 |------|---------|
-| Felipe Direito C. Macedo | 190086971 |
-| [Rodrigo Edmar Wright Dos Santos] | 200027158 |
-| [Nome do Aluno 3] | [Matrícula 3] |
+| Felipe Direito Corrieri de Macedo | 190086971 |
+| Rodrigo Edmar Wright Dos Santos | 200027158 |
 
 ## 1. Introdução
 
